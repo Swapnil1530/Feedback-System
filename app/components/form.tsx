@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { signIn } from "next-auth/react";
-import LoadingDots from "@/components/loading-dots";
+import LoadingDots from "@/app/components/loading-dots";
 import toast from "react-hot-toast";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -19,7 +19,7 @@ export default function Form({ type }: { type: "login" | "register" }) {
         if (type === "login") {
           signIn("credentials", {
             redirect: false,
-            email: e.currentTarget.email.value,
+            prnNumber: e.currentTarget.prnNumber.value,
             password: e.currentTarget.password.value,
             // @ts-ignore
           }).then(({ error }) => {
@@ -28,7 +28,7 @@ export default function Form({ type }: { type: "login" | "register" }) {
               toast.error(error);
             } else {
               router.refresh();
-              router.push("/protected");
+              router.push("/profile");
             }
           });
         } else {
@@ -38,7 +38,8 @@ export default function Form({ type }: { type: "login" | "register" }) {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              email: e.currentTarget.email.value,
+              name: e.currentTarget.Name.value,
+              prnNumber: e.currentTarget.prnNumber.value,
               password: e.currentTarget.password.value,
             }),
           }).then(async (res) => {
@@ -57,19 +58,38 @@ export default function Form({ type }: { type: "login" | "register" }) {
       }}
       className="flex flex-col space-y-4 bg-gray-50 px-4 py-8 sm:px-16"
     >
+      {type === "register" ? (
+        <div>
+          <label
+            htmlFor="name"
+            className="block text-xs text-gray-600 uppercase"
+          >
+            Name
+          </label>
+          <input
+            id="Name"
+            name="Name"
+            type="text"
+            required
+            className="mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm"
+          />
+        </div>
+      ) : (
+        <div></div>
+      )}
+
       <div>
         <label
-          htmlFor="email"
+          htmlFor="prnNumber"
           className="block text-xs text-gray-600 uppercase"
         >
-          Email Address
+          prnNumber
         </label>
         <input
-          id="email"
-          name="email"
-          type="email"
+          id="prnNumber"
+          name="prnNumber"
+          type="prnNumber"
           placeholder="panic@thedis.co"
-          autoComplete="email"
           required
           className="mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm"
         />

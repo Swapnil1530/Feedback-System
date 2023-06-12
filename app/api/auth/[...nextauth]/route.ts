@@ -7,17 +7,17 @@ export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       credentials: {
-        email: { label: "Email", type: "email" },
+        prnNumber: { label: "Email", type: "email" },
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
-        const { email, password } = credentials ?? {}
-        if (!email || !password) {
+        const {prnNumber, password } = credentials ?? {}
+        if (!prnNumber || !password) {
           throw new Error("Missing username or password");
         }
         const user = await prisma.user.findUnique({
           where: {
-            email,
+           prnNumber,
           },
         });
         // if user doesn't exist or password doesn't match
@@ -28,6 +28,40 @@ export const authOptions: NextAuthOptions = {
       },
     }),
   ],
+  secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    async session({ token, session }) {
+      if (token) {
+        session.user.id = token.id
+        session.user.name = token.name
+        session.user.prnNumber = token.prnNumber
+        
+      }
+
+      return session
+    },
+    async jwt({ token, user }:any) {
+      const dbUser = await prisma.user.findFirst({
+        where: {
+          prnNumber: token.prnNumber,
+        },
+      })
+
+      if (!dbUser) {
+        if (user) {
+          token.id = user?.id
+        }
+        return token
+      }
+
+      return {
+        id: dbUser.id,
+        name: dbUser.name,
+        prnNumber: dbUser.prnNumber,
+        
+      }
+    },
+  }
 };
 
 const handler = NextAuth(authOptions);
