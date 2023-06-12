@@ -3,7 +3,7 @@ import "@/styles/globals.css";
 import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
-import Header from "./components/header";
+import Header from "./components/Header";
 
 import { Analytics } from "@vercel/analytics/react";
 

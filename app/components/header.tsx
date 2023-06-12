@@ -8,10 +8,7 @@ import { useState } from "react";
 const header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { data: session } = useSession();
-  // if(session)return <p className="text-center">{session?.user?.name}</p>
-  // return(
-  // <p className="text-center">Your Are not logged in</p>
-  // )
+
   return (
     <div>
       <nav className="bg-gray-800">
