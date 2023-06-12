@@ -5,7 +5,7 @@ import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState } from "react";
 
-const header = () => {
+const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { data: session } = useSession();
 
@@ -155,4 +155,4 @@ const header = () => {
   );
 };
 
-export default header;
+export default Header;
