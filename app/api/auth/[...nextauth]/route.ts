@@ -8,60 +8,41 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       credentials: {
         prnNumber: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" }
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const {prnNumber, password } = credentials ?? {}
+        const { prnNumber, password } = credentials ?? {};
         if (!prnNumber || !password) {
           throw new Error("Missing username or password");
         }
         const user = await prisma.user.findUnique({
           where: {
-           prnNumber,
+            prnNumber,
           },
         });
         // if user doesn't exist or password doesn't match
         if (!user || !(await compare(password, user.password))) {
           throw new Error("Invalid username or password");
         }
-        return user;
+        return {
+          id : user.id,
+          name : user.name,
+          prnNumber : user.prnNumber,
+        };
       },
     }),
   ],
-  secret: process.env.NEXTAUTH_SECRET,
+
   callbacks: {
-    async session({ token, session }) {
-      if (token) {
-        session.user.id = token.id
-        session.user.name = token.name
-        session.user.prnNumber = token.prnNumber
-        
-      }
-
-      return session
+    async jwt({ token, user }) {
+      return { ...token, ...user };
     },
-    async jwt({ token, user }:any) {
-      const dbUser = await prisma.user.findFirst({
-        where: {
-          prnNumber: token.prnNumber,
-        },
-      })
 
-      if (!dbUser) {
-        if (user) {
-          token.id = user?.id
-        }
-        return token
-      }
-
-      return {
-        id: dbUser.id,
-        name: dbUser.name,
-        prnNumber: dbUser.prnNumber,
-        
-      }
+    async session({ session, token }) {
+      session.user = token as any;
+      return session;
     },
-  }
+  },
 };
 
 const handler = NextAuth(authOptions);
