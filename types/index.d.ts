@@ -3,5 +3,6 @@ interface user {
     name: string;
     prnNumber: string;
     password: string;
+    hasSubmitted: boolean;
     
 }

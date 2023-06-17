@@ -1,47 +1,47 @@
-<p align="center">
-  <a href="https://nextjs-postgres-auth.vercel.app/">
-    <img src="/public/logo.png" height="96">
-    <h3 align="center">Next.js Prisma PostgreSQL Auth Starter</h3>
-  </a>
-</p>
+# Project Overview
 
-<p align="center">
-This is a <a href="https://nextjs.org/">Next.js</a> starter kit that uses <a href="https://next-auth.js.org/">Next-Auth</a> for simple email + password login<br/>
-<a href="https://www.prisma.io/">Prisma</a> as the ORM, and a <a href="https://vercel.com/postgres">Vercel Postgres</a> database to persist the data.</p>
+The Next.js project is a powerful framework for building server-rendered React applications. It combines the benefits of React with server-side rendering, automatic code splitting, and an intuitive routing system.
 
-<br/>
+The Faculty Feedback System is a web-based application built with Next.js, designed to streamline and automate the process of collecting feedback from students regarding their experience with faculty members. It provides a user-friendly interface for students to submit their feedback anonymously and confidentially, and offers faculty members valuable insights into their teaching performance and areas for improvement.
 
-## Deploy Your Own
+## Roadmap
 
-You can clone & deploy it to Vercel with one click:
+- [x] ~Student Authntication~
+- [ ]  Build Feedaback Page
+- [ ]  Build Admin Panel
+- [ ]  Responsive styles
+- [ ]  Admin Dashboard
+- [ ]  Dark mode
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?demo-title=Next.js%20Prisma%20PostgreSQL%20Auth%20Starter&demo-description=Simple%20Next.js%2013%20starter%20kit%20that%20uses%20Next-Auth%20for%20auth%20and%20Prisma%20PostgreSQL%20as%20a%20database.&demo-url=https%3A%2F%2Fnextjs-postgres-auth.vercel.app%2F&demo-image=%2F%2Fimages.ctfassets.net%2Fe5382hct74si%2F7rsVQ1ZBSiWe9JGO6FUeZZ%2F210cba91036ca912b2770e0bd5d6cc5d%2Fthumbnail.png&project-name=Next.js%%20Prisma%20PostgreSQL%20Auth%20Starter&repository-name=nextjs-postgres-auth-starter&repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnextjs-postgres-auth-starter&from=templates&skippable-integrations=1&env=NEXTAUTH_SECRET&envDescription=Generate%20a%20random%20secret%3A&envLink=https://generate-secret.vercel.app/&stores=%5B%7B"type"%3A"postgres"%7D%5D)
+# Live Preview
 
-## Developing Locally
+[Live Preview](https://next-js-13-4-tau.vercel.app/)
 
-You can clone & create this repo with the following command
+# Prerequisites
 
-```bash
-npx create-next-app nextjs-typescript-starter --example "https://github.com/vercel/nextjs-postgres-auth-starter"
-```
+- Node.js (version 16.8.X or higher)
+- NPM (version 9.6.X or higher)
 
-## Getting Started
+# Installation
 
-First, run the development server:
+1. Clone the repository: git clone https://github.com/Swapnil1530/Feedback-System.git
+2. Navigate to the project directory: cd Feedback-System
+3. Install dependencies: npm install
 
-```bash
+# Usage
+
+To run the Next.js development server:
+
+```sh
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This command starts the development server and makes your application available at http://localhost:3000. The server automatically reloads whenever you make changes to your code.
 
-## Learn More
+# Resources
 
-To learn more about Next.js, take a look at the following resources:
+For more information on how to work with Next.js, refer to the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Next.js Documentation: https://nextjs.org/docs
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- React Documentation: https://reactjs.org/docs

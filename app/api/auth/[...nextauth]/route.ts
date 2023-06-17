@@ -15,19 +15,26 @@ export const authOptions: NextAuthOptions = {
         if (!prnNumber || !password) {
           throw new Error("Missing username or password");
         }
-        const user = await prisma.user.findUnique({
+        const user = await prisma.user.findFirst({
           where: {
             prnNumber,
           },
         });
+
+        const exist = user?.hasSubmitted;
+        if (exist) {
+          throw new Error("You have already submitted the form");
+        }
+
         // if user doesn't exist or password doesn't match
         if (!user || !(await compare(password, user.password))) {
           throw new Error("Invalid username or password");
         }
+
         return {
-          id : user.id,
-          name : user.name,
-          prnNumber : user.prnNumber,
+          id: user.id,
+          name: user.name,
+          prnNumber: user.prnNumber,
         };
       },
     }),

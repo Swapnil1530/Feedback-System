@@ -1,0 +1,18 @@
+ [
+    {
+        "id":1,
+        "text":"What is the capital of India?",
+        "options":["Delhi","Mumbai","Kolkata","Chennai"]
+    },
+    {
+        "id":2,
+        "text":"What is the capital of Australia?",
+        "options":["Sydney","Melbourne","Canberra","Perth"]
+    },
+    {
+        "id":3,
+        "text":"What is the capital of USA?",
+        "options":["New York","Washington DC","Los Angeles","Chicago"]
+    }
+   
+]

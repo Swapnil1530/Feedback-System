@@ -4,15 +4,56 @@ generator client {
 }
 
 datasource db {
-  provider          = "postgresql"
-  url               = env("POSTGRES_PRISMA_URL")
-  directUrl         = env("POSTGRES_URL_NON_POOLING")
-  shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
 }
 
+// datasource db {
+//   provider          = "postgresql"
+//   url               = env("POSTGRES_PRISMA_URL")
+//   directUrl         = env("POSTGRES_URL_NON_POOLING")
+//   shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING")
+// }
+
 model User {
-  id        Int    @id @default(autoincrement())
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
   name      String
-  password  String
   prnNumber String @unique
+  password  String
+  hasSubmitted Boolean @default(false)
+}
+
+// model Faculty {
+//   id       Int        @id @default(autoincrement())
+//   name     String
+//   // Add other faculty fields as needed
+//   subjects Subject[]
+
+// }
+
+// model Subject {
+//   id        Int        @id @default(autoincrement())
+//   name      String
+//   // Add other subject fields as needed
+//   faculty   Faculty    @relation(fields: [facultyId], references: [id])
+//   facultyId Int
+
+// }
+
+// model Question {
+//   id      Int      @id @default(autoincrement())
+//   text    String
+//   options String[]
+//   // Add other question fields as needed
+// }
+
+model Feedback {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  prnNumber String
+
+  faculty String
+
+  subject String
+  feedback Json[]
+  // Add other feedback fields as needed
 }

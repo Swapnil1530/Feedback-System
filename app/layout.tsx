@@ -41,7 +41,7 @@ export default async function RootLayout({
         <NextAuthProvider>
           <Header />
           <Toaster />
-          <div className="flex flex-col items-center justify-center min-h-screen py-2 text-4xl font-bold ">
+          <div className="flex flex-col items-center justify-center min-h-screen py-2 ">
           {children}
           </div>
           <Analytics />

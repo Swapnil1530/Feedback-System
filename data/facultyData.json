@@ -1,0 +1,22 @@
+ [
+{
+   "name" : "Faculty 1", 
+   "Subject" : "Subject 1"
+},
+{ 
+   "name" : "Faculty 2",
+    "Subject" : "Subject 2"
+},
+{
+   "name" : "Faculty 3",
+   "Subject" : "Subject 3"
+},
+{ 
+  "name" : "Faculty 4",
+   "Subject" : "Subject 4"
+},
+{ 
+   "name" : "Faculty 5",
+   "Subject" : "Subject 5"
+}
+]

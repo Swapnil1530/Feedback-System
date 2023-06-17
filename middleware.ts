@@ -6,19 +6,20 @@ export default async function middleware(req: NextRequest) {
   const path = req.nextUrl.pathname;
 
   // If it's the root path, just render it
-  if (path === "/") {
-    return NextResponse.next();
-  }
+  // if (path === "/") {
+  //   return NextResponse.next();
+  // }
 
   const session = await getToken({
     req,
     secret: process.env.NEXTAUTH_SECRET,
   });
+ 
 
-  if (!session && path === "/profile") {
+  if (!session && path ==="/") {
     return NextResponse.redirect(new URL("/login", req.url));
   } else if (session && (path === "/login" || path === "/register")) {
-    return NextResponse.redirect(new URL("/profile", req.url));
+    return NextResponse.redirect(new URL("/", req.url));
   }
   return NextResponse.next();
 }
