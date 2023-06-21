@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Form from "@/app/components/form";
+import Form from "../../components/form";
 import Link from "next/link";
 import { getServerSession } from "next-auth";
 
