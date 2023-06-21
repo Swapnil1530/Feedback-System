@@ -3,7 +3,7 @@ import "@/styles/globals.css";
 import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
-import Header from './components/Header/page'
+import Header from '../components/header'
 
 import { Analytics } from "@vercel/analytics/react";
 
@@ -41,7 +41,7 @@ export default async function RootLayout({
         <NextAuthProvider>
           <Header />
           <Toaster />
-          <div className="flex flex-col items-center justify-center min-h-screen py-2 ">
+          <div className="flex flex-col items-center justify-center min-h-screen  ">
           {children}
           </div>
           <Analytics />
