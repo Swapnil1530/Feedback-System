@@ -15,7 +15,7 @@ The Faculty Feedback System is a web-based application built with Next.js, desig
 
 # Live Preview
 
-[Live Preview](https://next-js-13-4-tau.vercel.app/)
+[Live Preview](https://feedback-systems.vercel.app)
 
 # Prerequisites
 
