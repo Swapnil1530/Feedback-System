@@ -7,7 +7,7 @@ The Faculty Feedback System is a web-based application built with Next.js, desig
 ## Roadmap
 
 - [x] ~Student Authntication~
-- [ ]  Build Feedaback Page
+- [x] ~Build Feedaback Page~
 - [ ]  Build Admin Panel
 - [ ]  Responsive styles
 - [ ]  Admin Dashboard
