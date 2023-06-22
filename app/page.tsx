@@ -30,7 +30,7 @@ const FeedbackPage = () => {
     }
     else{
       router.push('/thank');
-      signOut();
+      setTimeout(()=>signOut,3000);
     }
   };
 
