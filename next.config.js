@@ -4,6 +4,8 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  // staticPageGenerationTimeout :200,
+
   swcMinify: true,
 };
 

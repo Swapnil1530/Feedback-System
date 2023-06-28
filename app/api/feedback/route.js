@@ -1,6 +1,17 @@
 import { NextResponse, NextRequest } from "next/server";
 import prisma from "@/lib/prisma";
 
+export async function GET(req,res){
+  try {
+    const data = await prisma.feedback.findMany({});
+    return NextResponse.json(data,{status:200})
+  } catch (error) {
+    throw new Error(error);
+  }
+   
+
+}
+
 export async function POST(req, res) {
   const body = await req.json();
   const { prnNumber, faculty, answers, subject } = body;
@@ -23,3 +34,4 @@ export async function POST(req, res) {
     { status: 201 }
   );
 }
+
