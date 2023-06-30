@@ -1,5 +1,5 @@
 import React from 'react'
-import * as process from "process";
+
 
 
 const getFeedbackData = async () => {
@@ -15,7 +15,9 @@ const getFeedbackData = async () => {
 const Report =async () => {
 
 const docs = await getFeedbackData();
-
+ if(!docs){
+     return null;
+ }
   const faculty = docs.filter((student: any)=>student.faculty);
 
 
