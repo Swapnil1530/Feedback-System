@@ -1,20 +1,41 @@
+export const dynamic = "force-dynamic"
 import HomeTable from "./../../../components/home-table";
 
+// function getErrorResponse() {
+//   return {
+//     data: null,
+//     error: "Fetching news failed",
+//   };
+// }
 const StudentData = async () => {
-  const res = await fetch("http://localhost:3000/api/Admin", {
-    cache: "no-store",
-  });
-  return res.json();
+  try {
+    const res = await fetch("http://localhost:3000/api/Admin", {
+      cache: "no-store",
+    });
+   if(!res.ok){
+     return null;
+   }
+   return  res.json();
+
+
+  }catch (err){
+     throw new Error();
+
+
+  }
 };
 
-const Home = async () => {
+const DashboardHome = async () => {
 
-  const docs = await StudentData();
+const docs = await StudentData();
+  if(!docs){
+    return null;
+  }
   const TotalStudent = docs.length;
-  const submitted = docs.filter(
+  const submittedFeedback = docs.filter(
     (data: { hasSubmitted: any }) => data.hasSubmitted
   ).length;
-  const remaining = TotalStudent - submitted;
+  const remaining = TotalStudent - submittedFeedback;
   // @ts-ignore
 
   return (
@@ -28,9 +49,9 @@ const Home = async () => {
             </h3>
           </div>
           <div className="bg-white border-2 rounded font-semibold border-black hover:bg-gray-900 hover:text-white p-8">
-            <p className="text-2xl text-center">Submiited Student</p>
+            <p className="text-2xl text-center">Feedback Submitted</p>
             <h3 className="mt-2 text-blue-800 text-3xl text-center">
-              {submitted}
+              {submittedFeedback}
             </h3>
           </div>
           <div className="bg-white border-2 rounded font-semibold border-black hover:bg-gray-900 hover:text-white p-8">
@@ -47,5 +68,4 @@ const Home = async () => {
     </>
   );
 };
-
-export default Home;
+export default DashboardHome;

@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import StudentTable from "../../../../components/table";
 import Form from "components/form";
 
