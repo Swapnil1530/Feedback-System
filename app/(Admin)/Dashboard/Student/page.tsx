@@ -6,7 +6,9 @@ import * as process from "process";
 
 const getStudentData =async () =>{
     const res = await fetch(`${process.env.BASE_URL}/api/Admin`);
-    return res.json();
+    const json = JSON.stringify(res);
+
+    return JSON.parse(json);
 }
 const Student = async () => {
     const docs = await getStudentData();

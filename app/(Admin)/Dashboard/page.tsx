@@ -9,7 +9,9 @@ import HomeTable from "./../../../components/home-table";
 // }
 const getStudentData =async () => {
   const res = await fetch(`${process.env.BASE_URL}/api/Admin`);
-  return res.json();
+  const json = JSON.stringify(res);
+
+  return JSON.parse(json);
 }
 
 const DashboardHome = async () => {

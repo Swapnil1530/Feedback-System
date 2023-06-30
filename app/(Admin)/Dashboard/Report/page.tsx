@@ -6,7 +6,9 @@ const getFeedbackData = async () => {
 
     const res = await fetch(`${process.env.BASE_URL}/api/feedback`);
 
-   return res.json();
+    const json = JSON.stringify(res);
+
+    return JSON.parse(json);
 
 
 }
