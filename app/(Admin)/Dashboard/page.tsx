@@ -1,17 +1,20 @@
 
 import HomeTable from "./../../../components/home-table";
-import {getStudent} from "@/lib/query";
+// import {getStudent} from "@/lib/query";
 // function getErrorResponse() {
 //   return {
 //     data: null,
 //     error: "Fetching news failed",
 //   };
 // }
-
+const getStudentData =async () => {
+  const res = await fetch(`${process.env.BASE_URL}/api/Admin`);
+  return res.json();
+}
 
 const DashboardHome = async () => {
 
-const docs = await getStudent();
+const docs = await getStudentData();
 
   if(!docs){
     return null;
