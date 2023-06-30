@@ -1,16 +1,11 @@
 
 import StudentTable from "../../../../components/table";
 import Form from "components/form";
+import {getStudent} from "@/lib/query";
 
-const datas = async () => {
-    const res = await fetch("http://localhost:3000/api/Admin", {
-        cache: 'no-store',
-    });
-    return res.json();
-};
 
 const Student = async () => {
-    const docs = await datas();
+    const docs = await getStudent();
 
     return (
         <>
