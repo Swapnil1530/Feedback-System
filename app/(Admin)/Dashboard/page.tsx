@@ -1,4 +1,4 @@
-export const dynamic = "force-dynamic"
+
 import HomeTable from "./../../../components/home-table";
 
 // function getErrorResponse() {
