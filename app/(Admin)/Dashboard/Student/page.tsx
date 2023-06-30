@@ -12,7 +12,9 @@ const getStudentData =async () =>{
 }
 const Student = async () => {
     const docs = await getStudentData();
-
+    if(!docs){
+        return null;
+    }
     return (
         <>
 
