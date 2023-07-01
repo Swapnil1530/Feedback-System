@@ -1,4 +1,4 @@
-import prisma from "@/lib/prisma";
+import {db} from "@/lib/prisma";
 
 import { hash } from "bcrypt";
 import { NextResponse } from "next/server";
@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   const { name ,prnNumber, password } = await req.json();
-  const exists = await prisma.user.findFirst({
+  const exists = await db.user.findFirst({
     where: {
      prnNumber
     },
@@ -14,7 +14,7 @@ export async function POST(req: Request) {
   if (exists) {
     return NextResponse.json({ error: "User already exists" }, { status: 400 });
   } else {
-    const user = await prisma.user.create({
+    const user = await db.user.create({
       data: {
         name,
         prnNumber,

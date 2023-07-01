@@ -1,6 +1,6 @@
 import NextAuth, { type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import prisma from "@/lib/prisma";
+import {db} from "@/lib/prisma";
 import { compare } from "bcrypt";
 
 export const authOptions: NextAuthOptions = {
@@ -15,7 +15,7 @@ export const authOptions: NextAuthOptions = {
         if (!prnNumber || !password) {
           throw new Error("Missing username or password");
         }
-        const user = await prisma.user.findFirst({
+        const user = await db.user.findFirst({
           where: {
             prnNumber,
           },
