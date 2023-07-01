@@ -1,21 +1,15 @@
 import React from 'react'
-import {getFeedback} from "@/lib/query";
+import {getFeedbackData} from "@/lib/query";
 
-
-
-export const dynamic = 'force-dynamic';
-
-export const revalidate = 0;
 const Report =async () => {
 
-const docs:any = await getFeedback();
+const docs:any = await getFeedbackData();
  if(!docs){
      return null;
  }
   const faculty = docs.filter((student: any)=>student.faculty);
 
-
-  return (
+ return (
 
     <div>
 

@@ -1,22 +1,13 @@
 
 import HomeTable from "./../../../components/home-table";
-import {getStudent} from "@/lib/query";
-import {user} from "../../../types"
+import {getStudentData} from "@/lib/query";
+
 import React from "react";
 
-// function getErrorResponse() {
-//   return {
-//     data: null,
-//     error: "Fetching news failed",
-//   };
-// }
 
-export const dynamic = 'force-dynamic';
+const DashboardHome = async () => {
 
-export const revalidate = 0;
-const DashboardHome = async (data:user) => {
-
-const docs = await getStudent();
+const docs:any = await getStudentData();
 
   if(!docs){
     return null;

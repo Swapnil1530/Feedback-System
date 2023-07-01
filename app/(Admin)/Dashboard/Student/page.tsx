@@ -1,14 +1,12 @@
 
 import StudentTable from "../../../../components/table";
 import Form from "components/form";
-import {getStudent} from "@/lib/query";
+import {getStudentData} from "@/lib/query";
 
 
-export const dynamic = 'force-dynamic';
 
-export const revalidate = 0;
 const Student = async () => {
-    const docs = await getStudent();
+    const docs = await getStudentData();
     if(!docs){
         return null;
     }
