@@ -1,9 +1,9 @@
 import { NextResponse, NextRequest } from "next/server";
-import prisma from "@/lib/prisma";
+import {db} from "../../../lib/prisma"
 
 export async function GET(req,res){
   try {
-    const data = await prisma.feedback.findMany({});
+    const data = await db.feedback.findMany({});
     return NextResponse.json(data,{status:200})
   } catch (error) {
     throw new Error(error);
