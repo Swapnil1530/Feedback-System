@@ -1,20 +1,22 @@
 
 import HomeTable from "./../../../components/home-table";
-// import {getStudent} from "@/lib/query";
+import {getStudent} from "@/lib/query";
+import {user} from "../../../types"
+import React from "react";
+
 // function getErrorResponse() {
 //   return {
 //     data: null,
 //     error: "Fetching news failed",
 //   };
 // }
-const getStudentData =async () => {
-  const res = await fetch(`${process.env.BASE_URL}/api/Admin`);
-  return res.json();
-}
 
-const DashboardHome = async () => {
+export const dynamic = 'force-dynamic';
 
-const docs = await getStudentData();
+export const revalidate = 0;
+const DashboardHome = async (data:user) => {
+
+const docs = await getStudent();
 
   if(!docs){
     return null;
@@ -24,7 +26,7 @@ const docs = await getStudentData();
     (data: { hasSubmitted: any }) => data.hasSubmitted
   ).length;
   const remaining = TotalStudent - submittedFeedback;
-  // @ts-ignore
+
 
   return (
     <>

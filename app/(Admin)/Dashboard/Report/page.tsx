@@ -1,18 +1,14 @@
 import React from 'react'
+import {getFeedback} from "@/lib/query";
 
 
 
-const getFeedbackData = async () => {
+export const dynamic = 'force-dynamic';
 
-    const res = await fetch(`${process.env.BASE_URL}/api/feedback`);
-
-    return res.json();
-
-
-}
+export const revalidate = 0;
 const Report =async () => {
 
-const docs = await getFeedbackData();
+const docs:any = await getFeedback();
  if(!docs){
      return null;
  }

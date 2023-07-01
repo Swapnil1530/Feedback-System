@@ -1,15 +1,14 @@
 
 import StudentTable from "../../../../components/table";
 import Form from "components/form";
-// import {getStudent} from "@/lib/query";
-import * as process from "process";
+import {getStudent} from "@/lib/query";
 
-const getStudentData =async () =>{
-    const res = await fetch(`${process.env.BASE_URL}/api/Admin`);
-    return res.json();
-}
+
+export const dynamic = 'force-dynamic';
+
+export const revalidate = 0;
 const Student = async () => {
-    const docs = await getStudentData();
+    const docs = await getStudent();
     if(!docs){
         return null;
     }

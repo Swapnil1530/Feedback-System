@@ -1,12 +1,15 @@
-import prisma from "./prisma"
-export  async function getStudent(){
-    const data = await prisma.user.findMany({});
-    const json = JSON.stringify(data);
-    return JSON.parse(json);
+import {user} from "../types";
+import * as process from "process";
+
+
+
+
+export  async function getStudent():Promise<user>{
+    const res = await fetch(`${process.env.BASE_URL}/api/Admin`,{cache : "no-cache"});
+    return res.json();
 }
 
-export  async function getFeedback(){
-    const data = await prisma.feedback.findMany({});
-    const json = JSON.stringify(data);
-    return JSON.parse(json);
+export  async function getFeedback():Promise<user>{
+    const data = await fetch(`${process.env.BASE_URL}/api/feedback`);
+    return data.json();
 }
