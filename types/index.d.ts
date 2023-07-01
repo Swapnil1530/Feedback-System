@@ -1,4 +1,4 @@
-interface user {
+export interface user {
     id: string;
     name: string;
     prnNumber: string;
@@ -6,3 +6,10 @@ interface user {
     hasSubmitted: boolean;
     
 }
+
+// export interface data {
+//     id :string,
+//     name : string,
+//     prnNumber : String,
+//     hasSubmitted : boolean
+// }

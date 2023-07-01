@@ -45,10 +45,8 @@ export default function Form({ type }: { type: "login" | "register" }) {
           }).then(async (res) => {
             setLoading(false);
             if (res.status === 200) {
-              toast.success("Account created! Redirecting to login...");
-              setTimeout(() => {
-                router.push("/login");
-              }, 2000);
+              toast.success("Data Submitted");
+              router.refresh();
             } else {
               const { error } = await res.json();
               toast.error(error);
@@ -56,89 +54,120 @@ export default function Form({ type }: { type: "login" | "register" }) {
           });
         }
       }}
-      className="flex flex-col space-y-4 bg-gray-50 px-4 py-8 sm:px-16"
+      className="flex  flex-col space-y-4 p-5 sm:px-16"
     >
       {type === "register" ? (
-        <div>
-          <label
-            htmlFor="name"
-            className="block text-xs text-gray-600 uppercase"
-          >
-            Name
-          </label>
-          <input
-            id="Name"
-            name="Name"
-            type="text"
-            required
-            className="mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm"
-          />
+        <div className="flex items-center justify-center mx-auto max-w ">
+          <div className="flex flex-col sm:flex-row gap-1">
+            <div>
+              <label
+                htmlFor="first-name"
+                className="block text-sm font-semibold leading-6 text-gray-900"
+              >
+                NAME
+              </label>
+              <div className="mt-2.5">
+                <input
+                  type="text"
+                  name="Name"
+                  id="Name"
+                  autoComplete="given-name"
+                  className="block w-full rounded-md border-0 px-5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="last-name"
+                className="block text-sm font-semibold leading-6 text-gray-900"
+              >
+                PRN NUMBER
+              </label>
+              <div className="mt-2.5">
+                <input
+                  type="text"
+                  name="prnNumber"
+                  id="prnNumber"
+                  autoComplete="family-name"
+                  className="block w-full rounded-md border-0 px-5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                htmlFor="first-name"
+                className="block text-sm font-semibold leading-6 text-gray-900"
+              >
+                PASSWORD
+              </label>
+              <div className="mt-2.5">
+                <input
+                  type="text"
+                  name="password"
+                  id="password"
+                  autoComplete="given-name"
+                  className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                />
+              </div>
+            </div>
+            <div className="mt-8">
+              <button
+                disabled={loading}
+                className={`${
+                  loading
+                    ? "cursor-not-allowed border-black px-5 py-3.5 bg-white"
+                    : "border-white bg-indigo-600 text-white font-semibold text-sm px-5 py-3.5 py hover:bg-white hover:text-black hover:border-black"
+                } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none`}
+              >
+                {loading ? <LoadingDots color="#808080" /> : <p>ADD</p>}
+              </button>
+            </div>
+          </div>
         </div>
       ) : (
-        <div></div>
-      )}
-
-      <div>
-        <label
-          htmlFor="prnNumber"
-          className="block text-xs text-gray-600 uppercase"
-        >
-          prnNumber
-        </label>
-        <input
-          id="prnNumber"
-          name="prnNumber"
-          type="prnNumber"
-          placeholder="panic@thedis.co"
-          required
-          className="mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm"
-        />
-      </div>
-      <div>
-        <label
-          htmlFor="password"
-          className="block text-xs text-gray-600 uppercase"
-        >
-          Password
-        </label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          required
-          className="mt-1 block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-black focus:outline-none focus:ring-black sm:text-sm"
-        />
-      </div>
-      <button
-        disabled={loading}
-        className={`${
-          loading
-            ? "cursor-not-allowed border-gray-200 bg-gray-100"
-            : "border-black bg-black text-white hover:bg-white hover:text-black"
-        } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none`}
-      >
-        {loading ? (
-          <LoadingDots color="#808080" />
-        ) : (
-          <p>{type === "login" ? "Sign In" : "Sign Up"}</p>
-        )}
-      </button>
-      {type === "login" ? (
-        <p className="text-center text-sm text-gray-600">
-          Don&apos;t have an account?
-          <Link href="/register" className="font-semibold text-gray-800">
-            Sign up
-          </Link>
-          for free.
-        </p>
-      ) : (
-        <p className="text-center text-sm text-gray-600">
-          Already have an account?
-          <Link href="/login" className="font-semibold text-gray-800">
-            Sign in
-          </Link>
-          instead.
-        </p>
+        <>
+          <div>
+            <label
+              htmlFor="prnNumber"
+              className="block text-xs text-white uppercase"
+            >
+              prnNumber
+            </label>
+            <input
+              id="prnNumber"
+              name="prnNumber"
+              type="prnNumber"
+              placeholder=""
+              required
+              className="mt-1 block w-full bg-transparent rounded-md border  px-3 py-2  shadow-sm focus:border-white  focus:ring-white sm:text-sm"
+            />
+          </div>
+          <div>
+            <label
+              htmlFor="password"
+              className="block text-xs text-white uppercase"
+            >
+              Password
+            </label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              required
+              className="mt-1 block w-full appearance-none rounded-md border border-white px-3 py-2 bg-transparent shadow-sm focus:border-white  focus:ring-white sm:text-sm"
+            />
+          </div>
+          <button
+            disabled={loading}
+            className={`${
+              loading
+                ? "cursor-not-allowed border-gray-200 bg-gray-100"
+                : "border-black bg-white text-black hover:bg-white hover:text-black"
+            } flex h-10 w-full items-center justify-center rounded-md border text-sm transition-all focus:outline-none`}
+          >
+            {loading ? <LoadingDots color="#808080" /> : <p>Sign In</p>}
+          </button>
+        </>
       )}
     </form>
   );
