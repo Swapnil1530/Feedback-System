@@ -2,7 +2,7 @@
 import * as process from "process";
 import prisma from "@/lib/prisma";
 
-
+export const revalidate = 10;
 export async function getStudentData(){
     const res = await prisma.user.findMany({});
     return res;
