@@ -7,6 +7,6 @@ export const getStudentData = async ()=> {
 }
 
 export const getFeedbackData = async() => {
-    const data = await db.user.findMany();
+    const data = await db.feedback.findMany();
     return data;
 }
