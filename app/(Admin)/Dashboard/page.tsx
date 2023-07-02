@@ -8,7 +8,7 @@ import HomeTable from "./../../../components/home-table";
 import React from "react";
 
 const getStudentData = async () => {
-  const res = await fetch(`${process.env.BASE_URL}/api/user`);
+  const res = await fetch(`${process.env.BASE_URL}/api/Student`);
   return res.json();
 }
 const DashboardHome = async () => {

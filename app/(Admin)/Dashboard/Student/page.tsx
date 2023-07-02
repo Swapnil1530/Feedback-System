@@ -7,7 +7,7 @@ import Form from "components/form";
 // import {db} from "@/lib/prisma"
 
 const getStudentData = async () => {
-    const res = await fetch(`${process.env.BASE_URL}/api/user`);
+    const res = await fetch(`${process.env.BASE_URL}/api/Student`);
     return res.json();
 }
 
