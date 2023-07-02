@@ -1,7 +1,7 @@
 import * as process from "process";
 
 export const dynamic = "force-dynamic";
-import StudentTable from "../../../../components/table";
+import StudentTable from "../../../../components/Table/table";
 import Form from "components/form";
 import {getStudentData} from "@/lib/query";
 

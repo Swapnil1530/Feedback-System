@@ -34,7 +34,6 @@ const HomeTable = ({studentData}:any) => {
            
           </tr>
         </thead>
-
         <tbody>
           {currentPageData.map((data: any) =>{ 
              const statusClass = data.hasSubmitted ? "text-green-500" : "text-red-500";
@@ -98,6 +97,8 @@ const HomeTable = ({studentData}:any) => {
             Next
           </button>
         </nav>
+
+
       </div>
     </div>
   </div>;

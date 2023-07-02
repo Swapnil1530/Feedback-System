@@ -1,5 +1,8 @@
+
+
 export const dynamic = "force-dynamic"
-import HomeTable from "./../../../components/home-table";
+import HomeTable from "../../../components/Table/home-table";
+import Report from "@/app/(Admin)/Dashboard/Report/page";
 import {getStudentData} from "@/lib/query";
 
 
@@ -42,6 +45,7 @@ const docs = await  getStudentData();
       </div>
       <div>
         <HomeTable studentData={docs} />
+
       </div>
     </>
   );

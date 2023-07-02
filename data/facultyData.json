@@ -1,22 +1,22 @@
  [
 {
    "name" : "Faculty 1", 
-   "Subject" : "Subject 1"
+   "Subject" : "Java"
 },
 { 
    "name" : "Faculty 2",
-    "Subject" : "Subject 2"
+    "Subject" : "Python"
 },
 {
    "name" : "Faculty 3",
-   "Subject" : "Subject 3"
+   "Subject" : "DSA"
 },
 { 
   "name" : "Faculty 4",
-   "Subject" : "Subject 4"
+   "Subject" : "DOT net"
 },
 { 
    "name" : "Faculty 5",
-   "Subject" : "Subject 5"
+   "Subject" : "DBMS"
 }
 ]

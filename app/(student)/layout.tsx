@@ -2,7 +2,7 @@ import "@/styles/globals.css";
 import { ThemeProvider } from "../../components/theme-provider";
 
 import { Toaster } from "react-hot-toast";
-import Header from "../../components/header";
+import Header from "../../components/Navbar/header";
 
 import { Analytics } from "@vercel/analytics/react";
 

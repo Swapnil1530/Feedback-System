@@ -16,7 +16,7 @@ export async function POST(req, res) {
   const body = await req.json();
   const { prnNumber, faculty, answers, subject } = body;
 
-  const datas = await prisma.feedback.create({
+  const datas = await db.feedback.create({
     data: {
       prnNumber,
       faculty,
@@ -24,7 +24,7 @@ export async function POST(req, res) {
       feedback: answers,
     },
   });
-  await prisma.user.update({
+  await db.user.update({
     where: { prnNumber },
     data: { hasSubmitted: true },
   });
