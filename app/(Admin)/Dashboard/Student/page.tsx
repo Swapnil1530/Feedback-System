@@ -2,11 +2,13 @@
 import StudentTable from "../../../../components/table";
 import Form from "components/form";
 import {getStudentData} from "@/lib/query";
+import {db} from "@/lib/prisma"
 
 
 
 const Student = async () => {
-    const docs = await getStudentData();
+    const docs = await db.user.findMany();
+    // const docs = await getStudentData();
     if(!docs){
         return null;
     }

@@ -1,13 +1,14 @@
 
 import HomeTable from "./../../../components/home-table";
-import {getStudentData} from "@/lib/query";
+// import {getStudentData} from "@/lib/query";
+import {db} from "@/lib/prisma"
 
 import React from "react";
 
 
 const DashboardHome = async () => {
-
-const docs:any = await getStudentData();
+const docs = await db.user.findMany();
+// const docs:any = await  getStudentData();
 
   if(!docs){
     return null;
