@@ -2,12 +2,9 @@ import * as process from "process";
 
 export const dynamic = "force-dynamic";
 import React from 'react'
-// import {db} from "@/lib/prisma";
+import {getFeedbackData} from "@/lib/query";
 
-const getFeedbackData = async() => {
-    const res = await fetch(`${process.env.BASE_URL}/api/feedback`);
-    return res.json();
-}
+
 const Report =async () => {
 const docs = await getFeedbackData();
 // const docs = await db.feedback.findMany();
