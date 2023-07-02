@@ -1,13 +1,19 @@
+import process from "process";
+
 export const dynamic = "force-dynamic";
 import HomeTable from "./../../../components/home-table";
-
-import {db} from "@/lib/prisma"
+//
+// import {db} from "@/lib/prisma"
 
 import React from "react";
 
-
+const getStudentData = async () => {
+  const res = await fetch(`${process.env.BASE_URL}/api/user`);
+  return res.json();
+}
 const DashboardHome = async () => {
-const docs = await db.user.findMany();
+  const docs = await getStudentData();
+// const docs = await db.user.findMany();
 // const docs:any = await  getStudentData();
 
   if(!docs){
