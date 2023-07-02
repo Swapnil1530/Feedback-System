@@ -1,6 +1,6 @@
 
 import HomeTable from "./../../../components/home-table";
-// import {getStudentData} from "@/lib/query";
+
 import {db} from "@/lib/prisma"
 
 import React from "react";

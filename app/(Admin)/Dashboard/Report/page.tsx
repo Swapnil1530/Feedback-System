@@ -1,9 +1,9 @@
 import React from 'react'
-import {getFeedbackData} from "@/lib/query";
+import {db} from "@/lib/prisma";
 
 const Report =async () => {
 
-const docs:any = await getFeedbackData();
+const docs = await db.feedback.findMany();
  if(!docs){
      return null;
  }

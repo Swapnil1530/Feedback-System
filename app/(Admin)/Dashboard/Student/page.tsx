@@ -1,7 +1,7 @@
 
 import StudentTable from "../../../../components/table";
 import Form from "components/form";
-import {getStudentData} from "@/lib/query";
+
 import {db} from "@/lib/prisma"
 
 
