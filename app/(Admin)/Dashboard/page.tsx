@@ -3,10 +3,19 @@
 export const dynamic = "force-dynamic"
 import HomeTable from "../../../components/Table/home-table";
 import Report from "@/app/(Admin)/Dashboard/Report/page";
-import {getStudentData} from "@/lib/query";
+// import {getStudentData} from "@/lib/query";
 
 
 const DashboardHome = async () => {
+  const getStudentData = async() => {
+    try {
+      const res = await fetch(`${process.env.BASE_URL}/api/Student`, {cache: "no-store"})
+      if (!res) return null;
+      return res.json();
+    }catch (e:any) {
+      throw new Error(e)
+    }
+  }
 const docs = await  getStudentData();
 
   if(!docs){
