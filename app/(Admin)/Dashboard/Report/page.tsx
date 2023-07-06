@@ -1,6 +1,6 @@
 
 
-export const dynamic = "force-dynamic";
+export const revalidate = 0;
 export const fetchCache = 'force-no-store'
 import FacultyData from "../../../../components/Report/feedbackdata";
 import {getFeedbackData} from "@/lib/query";
