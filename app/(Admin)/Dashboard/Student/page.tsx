@@ -1,30 +1,19 @@
-
-export const fetchCache = 'force-no-store';
-export const revalidate = 2;
+export const revalidate = 0;
 import StudentTable from "../../../../components/Table/table";
 import Form from "components/form";
-// import {getStudentData} from "@/lib/query";
-
+import getStudent from "../../../../action/getStudent";
 
 const Student = async () => {
-    const getStudentData = async() => {
-        try {
-            const res = await fetch(`${process.env.BASE_URL}/api/Student`, {cache: 'no-store' })
-            if(!res) return null;
-            return res.json();
-        }catch (error:any) {
-            throw new Error(error)
-        }
-    }
-    const docs = await getStudentData();
+
+    const docs = await getStudent();
     if(!docs){
         return null;
     }
     return (
         <>
-
-            <Form type="register"/>
-
+            <div>
+                 <Form type="register"/>
+            </div>
             <div className="flex flex-col items-center justify-center">
                 <StudentTable studentData={docs}/>
             </div>

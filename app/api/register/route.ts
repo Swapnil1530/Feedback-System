@@ -1,9 +1,6 @@
 import {db} from "@/lib/prisma";
-
 import { hash } from "bcrypt";
 import { NextResponse } from "next/server";
-
-
 export async function POST(req: Request) {
   const { name ,prnNumber, password } = await req.json();
   const exists = await db.user.findFirst({
