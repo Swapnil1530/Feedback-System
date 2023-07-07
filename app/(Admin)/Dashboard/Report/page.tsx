@@ -1,17 +1,17 @@
 
 
 
-
+export const dynamic = 'force-dynamic';
+export const fetchCache = 'force-no-store';
 import FacultyData from "../../../../components/Report/feedbackdata";
 import {getFeedbackData} from "@/lib/query";
-export const fetchCache = 'force-no-store'
-export const revalidate = 0;
+
 
 const Report =async () => {
 
     const getFeedbackData = async() => {
         try {
-            const res = await fetch(`${process.env.BASE_URL}/api/feedback`, {cache: "no-store"});
+            const res = await fetch(`${process.env.BASE_URL}/api/feedback`,  {cache: 'no-store', next: { revalidate: 0 } });
             if (!res) return null;
             return res.json();
         }catch (e:any) {

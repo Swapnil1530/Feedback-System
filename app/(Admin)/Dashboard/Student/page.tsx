@@ -9,7 +9,7 @@ export const revalidate = 0;
 const Student = async () => {
     const getStudentData = async() => {
         try {
-            const res = await fetch(`${process.env.BASE_URL}/api/Student`,{cache:"no-store"})
+            const res = await fetch(`${process.env.BASE_URL}/api/Student`, {cache: 'no-store', next: { revalidate: 0 } })
             if(!res) return null;
             return res.json();
         }catch (error:any) {
