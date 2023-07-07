@@ -3,9 +3,8 @@
 
 import HomeTable from "../../../components/Table/home-table";
 import Report from "@/app/(Admin)/Dashboard/Report/page";
-// import {getStudentData} from "@/lib/query";
-export const dynamic = "force-dynamic";
-export const fetchCache = 'force-no-store'
+// import {getStudentData} from "@/lib/query";export const fetchCache = 'force-no-store'
+// export const revalidate = 0;
 
 const DashboardHome = async () => {
   const getStudentData = async() => {

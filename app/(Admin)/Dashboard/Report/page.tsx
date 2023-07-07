@@ -4,9 +4,9 @@
 
 import FacultyData from "../../../../components/Report/feedbackdata";
 import {getFeedbackData} from "@/lib/query";
-
-export const dynamic = "force-dynamic";
 export const fetchCache = 'force-no-store'
+export const revalidate = 0;
+
 const Report =async () => {
 
     const getFeedbackData = async() => {

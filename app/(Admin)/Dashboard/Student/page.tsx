@@ -3,8 +3,8 @@ import * as process from "process";
 import StudentTable from "../../../../components/Table/table";
 import Form from "components/form";
 // import {getStudentData} from "@/lib/query";
-export const dynamic = "force-dynamic";
 export const fetchCache = 'force-no-store'
+export const revalidate = 0;
 
 const Student = async () => {
     const getStudentData = async() => {
