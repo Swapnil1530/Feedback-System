@@ -1,7 +1,7 @@
 
 
-export const dynamic = 'force-dynamic';
 export const fetchCache = 'force-no-store';
+export const revalidate = 2;
 import HomeTable from "../../../components/Table/home-table";
 import Report from "@/app/(Admin)/Dashboard/Report/page";
 // import {getStudentData} from "@/lib/query";export const fetchCache = 'force-no-store'
