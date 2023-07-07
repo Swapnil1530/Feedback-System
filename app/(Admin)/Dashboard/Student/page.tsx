@@ -1,11 +1,10 @@
 import * as process from "process";
-export const revalidate = 0;
-// export const dynamic = "force-dynamic";
-export const fetchCache = 'force-no-store'
+
 import StudentTable from "../../../../components/Table/table";
 import Form from "components/form";
 // import {getStudentData} from "@/lib/query";
-
+export const dynamic = "force-dynamic";
+export const fetchCache = 'force-no-store'
 
 const Student = async () => {
     const getStudentData = async() => {
