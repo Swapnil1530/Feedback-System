@@ -9,7 +9,7 @@ import Form from "components/form";
 const Student = async () => {
     const getStudentData = async() => {
         try {
-            const res = await fetch(`${process.env.BASE_URL}/api/Student`, {cache: 'no-store', next: { revalidate: 0 } })
+            const res = await fetch(`${process.env.BASE_URL}/api/Student`, {cache: 'no-store' })
             if(!res) return null;
             return res.json();
         }catch (error:any) {

@@ -10,7 +10,7 @@ import Report from "@/app/(Admin)/Dashboard/Report/page";
 const DashboardHome = async () => {
   const getStudentData = async() => {
     try {
-      const res = await fetch(`${process.env.BASE_URL}/api/Student`, { cache: 'no-store', next: { revalidate: 0 } })
+      const res = await fetch(`${process.env.BASE_URL}/api/Student`, { cache: 'no-store' })
       if (!res) return null;
       return res.json();
     }catch (e:any) {
