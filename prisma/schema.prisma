@@ -21,6 +21,7 @@ model User {
   prnNumber String @unique
   password  String
   hasSubmitted Boolean @default(false)
+  role       String   @default("user") 
 }
 
 // model Faculty {

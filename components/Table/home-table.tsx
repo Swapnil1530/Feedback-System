@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react";
+import React ,{ useState } from "react";
 const HomeTable = ({studentData}:any) => {
   const itemsPerPage = 5;
   const totalPages = Math.ceil(studentData.length / itemsPerPage);

@@ -7,12 +7,9 @@ import Header from "../../components/Navbar/header";
 import { Analytics } from "@vercel/analytics/react";
 
 import NextAuthProvider from "../provider";
+import React from "react";
 
-export default async function HomeLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default async function HomeLayout({children,}: {children: React.ReactNode;}) {
   return (
     <NextAuthProvider>
       <Header />

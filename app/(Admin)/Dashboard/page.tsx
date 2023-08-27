@@ -1,8 +1,9 @@
 export const revalidate = 0;
+import React from "react";
 import HomeTable from "../../../components/Table/home-table";
 import getStudent from "../../../action/getStudent";
 
-const DashboardHome = async () => {
+const DashboardHome =  async () => {
 
 const docs = await getStudent();
 

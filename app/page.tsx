@@ -1,7 +1,7 @@
 "use client";
-import { useState, useEffect } from "react";
-import facultyData from "../data/facultyData.json"; // Path to your JSON file containing faculty details
-import questionsData from "../data/question.json"; // Path to your JSON file containing questions data
+import React ,{ useState, useEffect } from "react";
+import facultyData from "../data/facultyData.json";
+import questionsData from "../data/question.json";
 import { signOut, useSession } from "next-auth/react";
 import LoadingDots from "../components/loading-dots";
 import { useRouter } from "next/navigation";
@@ -9,7 +9,6 @@ import { useRouter } from "next/navigation";
 const FeedbackPage = () => {
   const { data: session } = useSession();
   const prnNumber = session?.user?.prnNumber;
-
   const [message, setMessage] = useState("");
   const [facultyIndex, setFacultyIndex]: any = useState(0);
   const [selectedFaculty, setSelectedFaculty]: any = useState(null);
@@ -85,14 +84,14 @@ const FeedbackPage = () => {
       <form onSubmit={handleSubmit}>
         <div className="text-white flex justify-center items-center gap-4 text-center p-2 mt-2 bg-blue-900 rounded ">
           <h3>PrnNumber : {prnNumber}</h3>
-          <h3>{selectedFaculty?.name}</h3>
-          <p>{selectedFaculty?.Subject}</p>
+          <h3>Faculty : {selectedFaculty?.name}</h3>
+          <p>Subject : {selectedFaculty?.Subject}</p>
         </div>
 
         <div className="text-white">
           {questionsData.map((question, index) => (
             <div key={index}>
-              <p>{question.text}</p>
+              <p>{question.id} ) {question.text}</p>
               {selectedFaculty && (
                 <div className="flex flex-col ">
                   {question.options.map((option, optionIndex) => (
@@ -100,15 +99,18 @@ const FeedbackPage = () => {
                       key={optionIndex}
                       className="flex items-center  py-4 pl-5 m-2 ml-0 space-x-2 border-2 cursor-pointer bg-white/5 border-white/10 rounded-xl"
                     >
+                      <label htmlFor={`answer-${index}-${optionIndex}`} className="flex w-full items-center cursor-pointer">
                       <input
                         type="radio"
-                        className="w-5 h-5 bg-black"
+                        id={`answer-${index}-${optionIndex}`}
+                        className="h-5 bg-black"
                         name={`answer-${index}`}
                         checked={answers[index] === option}
                         onChange={() => handleAnswerChange(index, option)}
                         required
                       />
                       <div className="ml-6 text-white">{option}</div>
+                      </label>
                     </div>
                   ))}
                 </div>

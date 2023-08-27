@@ -1,15 +1,13 @@
 import { NextResponse, NextRequest } from "next/server";
-import {db} from "../../../lib/prisma"
+import { db } from "../../../lib/prisma";
 
-export async function GET(req,res){
+export async function GET(req, res) {
   try {
     const data = await db.feedback.findMany({});
-    return NextResponse.json(data,{status:200})
+    return NextResponse.json(data, { status: 200 });
   } catch (error) {
     throw new Error(error);
   }
-   
-
 }
 
 export async function POST(req, res) {
@@ -34,4 +32,3 @@ export async function POST(req, res) {
     { status: 201 }
   );
 }
-

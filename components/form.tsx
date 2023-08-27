@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { signIn } from "next-auth/react";
+import React, { useEffect, useState } from "react";
+import { getSession, signIn, useSession } from "next-auth/react";
 import LoadingDots from "../components/loading-dots";
 import toast from "react-hot-toast";
 import Link from "next/link";
@@ -10,6 +10,7 @@ import { useRouter } from "next/navigation";
 export default function Form({ type }: { type: "login" | "register" }) {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  // const {data:session, status} = useSession();
 
   return (
     <form
@@ -22,10 +23,16 @@ export default function Form({ type }: { type: "login" | "register" }) {
             prnNumber: e.currentTarget.prnNumber.value,
             password: e.currentTarget.password.value,
             // @ts-ignore
-          }).then(({ error }) => {
+          }).then(async ({ error }) => {
             if (error) {
               setLoading(false);
               toast.error(error);
+            }
+            const session = await getSession();
+            const userRole = session?.user.role;
+
+            if (userRole === "admin") {
+              router.push("/Dashboard");
             } else {
               router.refresh();
               router.push("/");

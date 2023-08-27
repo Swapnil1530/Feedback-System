@@ -1,11 +1,9 @@
-import Image from "next/image";
+import React from "react";
+
 import Form from "../../../components/form";
 import Link from "next/link";
-import { getServerSession } from "next-auth";
 
-export default async  function Login() {
-  const session =await getServerSession();
- 
+export default async function Login() {
   return (
     <div className="flex mt-[100px] items-center justify-center ">
       <div className="z-10  w-full max-w-md overflow-hidden rounded-2xl border shadow-xl">

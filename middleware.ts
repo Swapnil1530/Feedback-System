@@ -2,25 +2,37 @@ import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 
 export default async function middleware(req: NextRequest) {
-  // Get the pathname of the request (e.g. /, /protected)
   const path = req.nextUrl.pathname;
-
-  // If it's the root path, just render it
-  // if (path === "/") {
-  //   return NextResponse.next();
-  // }
-
   const session = await getToken({
     req,
     secret: process.env.NEXTAUTH_SECRET,
   });
 
-  if (!session && path === "/") {
+  if (
+    !session &&
+    (path === "/" || path === "/profile" || path === "/Dashboard")
+  ) {
     return NextResponse.redirect(new URL("/login", req.url));
-  } else if (!session && path === "/profile") {
-    return NextResponse.redirect(new URL("/login", req.url));
-  } else if (session && (path === "/login" || path === "/register")) {
-    return NextResponse.redirect(new URL("/", req.url));
   }
+
+  if (session) {
+    var userRole = session?.role;
+   
+    if(path === "/login" || path === "/register"){
+      return NextResponse.redirect(new URL("/" , req.url))
+    }
+    if (path === "/" || path === "/profile") {
+      return NextResponse.next();
+    }
+
+    if (path === "/Dashboard" && userRole === "admin") {
+      return NextResponse.next();
+    }
+
+    if (path === "/Dashboard" && userRole !== "admin") {
+      return NextResponse.redirect(new URL("/NoAccess", req.url));
+    }
+  }
+
   return NextResponse.next();
 }

@@ -4,6 +4,7 @@ export interface user {
     prnNumber: string;
     password: string;
     hasSubmitted: boolean;
+    role : string;
     
 }
 

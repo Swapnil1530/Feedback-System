@@ -1,4 +1,5 @@
 export const revalidate = 0;
+import React from "react";
 import StudentTable from "../../../../components/Table/table";
 import Form from "components/form";
 import getStudent from "../../../../action/getStudent";

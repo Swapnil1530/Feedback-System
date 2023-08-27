@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./loading-dots.module.css";
 
 const LoadingDots = ({ color = "#000" }: { color?: string }) => {
