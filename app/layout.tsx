@@ -1,6 +1,7 @@
+import React from "react";
 import "@/styles/globals.css";
 import NextAuthProvider from "./provider";
-import React from "react";
+
 
 export default function RootLayout({
   children,

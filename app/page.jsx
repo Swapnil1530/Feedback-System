@@ -4,7 +4,7 @@ import facultyData from "../data/facultyData.json";
 import questionsData from "../data/question.json";
 import { signOut, useSession } from "next-auth/react";
 import LoadingDots from "../components/loading-dots";
-import { useRouter } from "next/navigation"; // Changed import here
+import { useRouter } from "next/navigation"; 
 
 const FeedbackPage = () => {
   const { data: session } = useSession();
@@ -46,7 +46,7 @@ const FeedbackPage = () => {
       },
       body: JSON.stringify({
         prnNumber,
-        feedbackData: updatedFeedbackData, // Add the new faculty feedback data
+        feedbackData: updatedFeedbackData, 
         questionsData: questionsData,
       }),
     });
@@ -151,11 +151,7 @@ const handleSubmit = async (e) => {
             <p>{facultyData.length - 1 === facultyIndex ? "Submit" : "Next"}</p>
           )}
         </button>
-        {/* <div className="flex items-center justify-center">
-        <button type="submit"className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mb-4 rounded">
-          {facultyData.length - 1 === facultyIndex ? "Submit" : "Next"}
-        </button>
-        </div> */}
+       
       </form>
     </div>
   );
