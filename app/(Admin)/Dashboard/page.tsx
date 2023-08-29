@@ -3,14 +3,13 @@ import React from "react";
 import HomeTable from "../../../components/Table/home-table";
 import getStudent from "../../../action/getStudent";
 
-const DashboardHome =  async () => {
+const DashboardHome = async () => {
+  const docs = await getStudent();
 
-const docs = await getStudent();
-
-  if(!docs){
+  if (!docs) {
     return null;
   }
-  const TotalStudent = docs.length;
+  const TotalStudent = docs.length - 1;
   const submittedFeedback = docs.filter(
     (data: { hasSubmitted: any }) => data.hasSubmitted
   ).length;

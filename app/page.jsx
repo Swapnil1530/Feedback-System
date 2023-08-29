@@ -1,18 +1,17 @@
 "use client";
-import React ,{ useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import facultyData from "../data/facultyData.json";
 import questionsData from "../data/question.json";
 import { signOut, useSession } from "next-auth/react";
 import LoadingDots from "../components/loading-dots";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation"; // Changed import here
 
 const FeedbackPage = () => {
   const { data: session } = useSession();
   const prnNumber = session?.user?.prnNumber;
-  const [message, setMessage] = useState("");
-  const [facultyIndex, setFacultyIndex]: any = useState(0);
-  const [selectedFaculty, setSelectedFaculty]: any = useState(null);
-  const [feedbackSubmitted, setFeedbackSubmitted]: any = useState(false);
+  const [facultyIndex, setFacultyIndex] = useState(0);
+  const [selectedFaculty, setSelectedFaculty] = useState(null);
+  const [feedbackData, setFeedbackData] = useState([]);
   const [answers, setAnswers] = useState([]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -24,63 +23,77 @@ const FeedbackPage = () => {
   const handleNextFaculty = () => {
     if (facultyIndex < facultyData.length - 1) {
       setFacultyIndex(facultyIndex + 1);
-      setLoading(false);
       setSelectedFaculty(null);
       setAnswers([]);
     }
-    else{
-      router.push('/thank');
-      setTimeout(()=>signOut(),3000);
-    }
+   
   };
 
-  const handleAnswerChange = (questionIndex: any, answer: any) => {
-    const updatedAnswers: any = [...answers];
+  const handleAnswerChange = (questionIndex, answer) => {
+    const updatedAnswers = [...answers];
     updatedAnswers[questionIndex] = answer;
     setAnswers(updatedAnswers);
   };
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const response = await fetch("/api/feedback", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          prnNumber,
-          faculty: selectedFaculty.name,
-          subject: selectedFaculty.Subject,
-          answers: questionsData.map((question, index) => ({
-            question: question.text,
-            answer: answers[index],
-          })),
-        }),
-      });
-      const res = await response.json();
+  const submitAllFeedback = async (updatedFeedbackData) => {
+  setLoading(true);
 
-      if (res.ok) {
-        // Feedback saved successfully
-        setMessage(res.message);
-        setAnswers([]);
-        setLoading(false);
-        handleNextFaculty();
-      } else {
-        console.error("Failed to save feedback data");
-        // Handle the error as needed
-      }
-    } catch (error) {
-      console.error("Failed to save feedback data:", error);
+  try {
+    const response = await fetch("/api/feedback", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        prnNumber,
+        feedbackData: updatedFeedbackData, // Add the new faculty feedback data
+        questionsData: questionsData,
+      }),
+    });
+
+    const res = await response.json();
+
+    if (res.message) {
+      setLoading(false);
+      router.push("/thank");
+      signOut();
+    } else {
+      console.error("Failed to save feedback data");
     }
+  } catch (error) {
+    console.error("Failed to save feedback data:", error);
+  }
+};
 
-    setAnswers([]);
-    handleNextFaculty();
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const facultyFeedback = {
+    faculty: selectedFaculty.name,
+    subject: selectedFaculty.Subject,
+    answers: answers,
   };
 
+  setFeedbackData((prevFeedbackData) => [
+    ...prevFeedbackData,
+    facultyFeedback,
+  ]);
+
+  if (facultyIndex === facultyData.length - 1) {
+    
+    const updatedFeedbackData = [
+      ...feedbackData,
+      facultyFeedback,
+    ];
+
+    await submitAllFeedback(updatedFeedbackData);
+  } else {
+    handleNextFaculty();
+  }
+};
+
   return (
-    <div className="flex flex-col w-full pl-10 pr-10 md:pl-40 md:pr-40  bg-[#1A1A1A]">
+    <div className="flex flex-col w-full pl-10 pr-10 md:pl-40 md:pr-40 bg-[#1A1A1A]">
       <form onSubmit={handleSubmit}>
         <div className="text-white flex justify-center items-center gap-4 text-center p-2 mt-2 bg-blue-900 rounded ">
           <h3>PrnNumber : {prnNumber}</h3>
@@ -91,7 +104,9 @@ const FeedbackPage = () => {
         <div className="text-white">
           {questionsData.map((question, index) => (
             <div key={index}>
-              <p>{question.id} ) {question.text}</p>
+              <p>
+                {question.id}  {question.text}
+              </p>
               {selectedFaculty && (
                 <div className="flex flex-col ">
                   {question.options.map((option, optionIndex) => (
@@ -99,17 +114,20 @@ const FeedbackPage = () => {
                       key={optionIndex}
                       className="flex items-center  py-4 pl-5 m-2 ml-0 space-x-2 border-2 cursor-pointer bg-white/5 border-white/10 rounded-xl"
                     >
-                      <label htmlFor={`answer-${index}-${optionIndex}`} className="flex w-full items-center cursor-pointer">
-                      <input
-                        type="radio"
-                        id={`answer-${index}-${optionIndex}`}
-                        className="h-5 bg-black"
-                        name={`answer-${index}`}
-                        checked={answers[index] === option}
-                        onChange={() => handleAnswerChange(index, option)}
-                        required
-                      />
-                      <div className="ml-6 text-white">{option}</div>
+                      <label
+                        htmlFor={`answer-${index}-${optionIndex}`}
+                        className="flex w-full items-center cursor-pointer"
+                      >
+                        <input
+                          type="radio"
+                          id={`answer-${index}-${optionIndex}`}
+                          className="h-5 bg-black"
+                          name={`answer-${index}`}
+                          checked={answers[index] === option}
+                          onChange={() => handleAnswerChange(index, option)}
+                          required
+                        />
+                        <div className="ml-6 text-white">{option}</div>
                       </label>
                     </div>
                   ))}

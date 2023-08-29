@@ -11,24 +11,36 @@ export async function GET(req, res) {
 }
 
 export async function POST(req, res) {
-  const body = await req.json();
-  const { prnNumber, faculty, answers, subject } = body;
+  const { prnNumber, feedbackData, questionsData } = await req.json();
 
-  const datas = await db.feedback.create({
-    data: {
-      prnNumber,
-      faculty,
-      subject,
-      feedback: answers,
-    },
-  });
-  await db.user.update({
-    where: { prnNumber },
-    data: { hasSubmitted: true },
-  });
+  try {
+    for (const feedbackEntry of feedbackData) {
+      const { faculty, subject, answers } = feedbackEntry;
 
-  return NextResponse.json(
-    { message: "Feedback Saved Sucessfully" },
-    { status: 201 }
-  );
+     
+      const mappedFeedback = answers.map((answer, index) => ({
+        question: questionsData[index].text,
+        answer,
+      }));
+
+      await db.feedback.create({
+        data: {
+          prnNumber,
+          faculty,
+          subject,
+          feedback: mappedFeedback,
+        },
+      });
+    }
+
+    await db.user.update({
+      where: { prnNumber },
+      data: { hasSubmitted: true },
+    });
+
+    return NextResponse.json({ message: "Feedback Saved Successfully" });
+  } catch (error) {
+    console.error("Failed to save feedback data:", error);
+    return NextResponse.json({ message: "Failed to save feedback data" });
+  }
 }
