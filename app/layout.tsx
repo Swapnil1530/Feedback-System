@@ -1,21 +1,16 @@
 import React from "react";
-import "@/styles/globals.css";
-import NextAuthProvider from "./provider";
-
+import "../styles/globals.css";
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-
   return (
-  <html>
-     <NextAuthProvider>
-    <body>
-  {children}
-  </body>
-  </NextAuthProvider>
-  </html>
-  )
+    <html>
+      <body>
+        <div>{children}</div>
+      </body>
+    </html>
+  );
 }

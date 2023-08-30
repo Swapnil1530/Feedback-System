@@ -1,18 +1,19 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import facultyData from "../data/facultyData.json";
-import questionsData from "../data/question.json";
+import facultyData from "../../../data/facultyData.json";
+import questionsData from "../../../data/question.json";
 import { signOut, useSession } from "next-auth/react";
-import LoadingDots from "../components/loading-dots";
+import LoadingDots from "../../../components/loading-dots";
 import { useRouter } from "next/navigation"; 
+import { toast } from "react-hot-toast";
 
 const FeedbackPage = () => {
   const { data: session } = useSession();
   const prnNumber = session?.user?.prnNumber;
-  const [facultyIndex, setFacultyIndex] = useState(0);
-  const [selectedFaculty, setSelectedFaculty] = useState(null);
-  const [feedbackData, setFeedbackData] = useState([]);
-  const [answers, setAnswers] = useState([]);
+  const [facultyIndex, setFacultyIndex]= useState(0);
+  const [selectedFaculty, setSelectedFaculty]:any = useState(null);
+  const [feedbackData, setFeedbackData]= useState([]);
+  const [answers, setAnswers]:any = useState([]);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -29,13 +30,13 @@ const FeedbackPage = () => {
    
   };
 
-  const handleAnswerChange = (questionIndex, answer) => {
-    const updatedAnswers = [...answers];
+  const handleAnswerChange = (questionIndex:number, answer:string) => {
+    const updatedAnswers:any = [...answers];
     updatedAnswers[questionIndex] = answer;
     setAnswers(updatedAnswers);
   };
 
-  const submitAllFeedback = async (updatedFeedbackData) => {
+  const submitAllFeedback = async (updatedFeedbackData:string) => {
   setLoading(true);
 
   try {
@@ -55,17 +56,20 @@ const FeedbackPage = () => {
 
     if (res.message) {
       setLoading(false);
-      router.push("/thank");
-      signOut();
+      toast.success("Feedback Saved Sucessfully");
+      setTimeout(()=>{
+        signOut()
+      },2000)
+     signOut();
     } else {
-      console.error("Failed to save feedback data");
+      toast.error("Failed to save feedback data");
     }
   } catch (error) {
     console.error("Failed to save feedback data:", error);
   }
 };
 
-const handleSubmit = async (e) => {
+const handleSubmit = async (e:any) => {
   e.preventDefault();
 
   const facultyFeedback = {
@@ -74,14 +78,14 @@ const handleSubmit = async (e) => {
     answers: answers,
   };
 
-  setFeedbackData((prevFeedbackData) => [
+  setFeedbackData((prevFeedbackData):any => [
     ...prevFeedbackData,
     facultyFeedback,
   ]);
 
   if (facultyIndex === facultyData.length - 1) {
     
-    const updatedFeedbackData = [
+    const updatedFeedbackData:any = [
       ...feedbackData,
       facultyFeedback,
     ];

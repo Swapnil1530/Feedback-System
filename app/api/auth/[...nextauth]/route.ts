@@ -1,6 +1,6 @@
 import NextAuth, { type NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import {db} from "@/lib/prisma";
+import { db } from "@/lib/prisma";
 import { compare } from "bcrypt";
 
 export const authOptions: NextAuthOptions = {
@@ -23,10 +23,9 @@ export const authOptions: NextAuthOptions = {
 
         const exist = user?.hasSubmitted;
         if (exist) {
-          throw new Error("You have already submitted the form");
+          throw new Error("You have already submitted the feedback");
         }
 
-        // if user doesn't exist or password doesn't match
         if (!user || !(await compare(password, user.password))) {
           throw new Error("Invalid username or password");
         }
@@ -35,24 +34,23 @@ export const authOptions: NextAuthOptions = {
           id: user.id,
           name: user.name,
           prnNumber: user.prnNumber,
-          role : user.role
+          role: user.role,
         };
       },
     }),
   ],
 
   callbacks: {
-    async jwt({ token, user}) {
-      if(user){
+    async jwt({ token, user }) {
+      if (user) {
         token.role = user.role;
       }
       return { ...token, ...user };
     },
 
     async session({ session, token }) {
-      
       session.user = token as any;
-      
+
       return session;
     },
   },

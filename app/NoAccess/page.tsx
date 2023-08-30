@@ -1,11 +1,13 @@
-import React from 'react'
+import React from "react";
 
 const NoAccess = () => {
-  return(
+  return (
     <>
-     <div className='flex items-center justify-center font-semibold'>No Dashboard Access</div>
+      <div className="flex w-full h-full items-center justify-center font-semibold">
+        You Cannot Access The Dashboard
+      </div>
     </>
-  )
-}
+  );
+};
 
 export default NoAccess;

@@ -1,5 +1,5 @@
 import "@/styles/globals.css";
-import { ThemeProvider } from "../../components/theme-provider";
+
 
 import { Toaster } from "react-hot-toast";
 import Header from "../../components/Navbar/header";
@@ -15,9 +15,9 @@ export default async function HomeLayout({children,}: {children: React.ReactNode
       <Header />
       <Toaster />
       <div className="flex items-center justify-center ">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+       
           {children}
-        </ThemeProvider>
+        
       </div>
       <Analytics />
     </NextAuthProvider>

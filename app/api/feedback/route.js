@@ -17,7 +17,6 @@ export async function POST(req, res) {
     for (const feedbackEntry of feedbackData) {
       const { faculty, subject, answers } = feedbackEntry;
 
-     
       const mappedFeedback = answers.map((answer, index) => ({
         question: questionsData[index].text,
         answer,

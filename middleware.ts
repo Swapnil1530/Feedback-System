@@ -10,16 +10,19 @@ export default async function middleware(req: NextRequest) {
 
   if (
     !session &&
-    (path === "/" || path === "/profile" || path === "/Dashboard")
+    (path === "/" ||
+      path === "/profile" ||
+      path === "/Dashboard" ||
+      path === "/feedback")
   ) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
 
   if (session) {
     var userRole = session?.role;
-   
-    if(path === "/login" || path === "/register"){
-      return NextResponse.redirect(new URL("/" , req.url))
+
+    if (path === "/login") {
+      return NextResponse.redirect(new URL("/", req.url));
     }
     if (path === "/" || path === "/profile") {
       return NextResponse.next();
