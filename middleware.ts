@@ -12,7 +12,7 @@ export default async function middleware(req: NextRequest) {
     !session &&
     (path === "/" ||
       path === "/profile" ||
-      path === "/Dashboard" ||
+      path.startsWith("/Dashboard") ||
       path === "/feedback")
   ) {
     return NextResponse.redirect(new URL("/login", req.url));
@@ -28,12 +28,12 @@ export default async function middleware(req: NextRequest) {
       return NextResponse.next();
     }
 
-    if (path === "/Dashboard" && userRole === "admin") {
-      return NextResponse.next();
-    }
-
-    if (path === "/Dashboard" && userRole !== "admin") {
-      return NextResponse.redirect(new URL("/NoAccess", req.url));
+    if (path.startsWith("/Dashboard")) {
+      if (userRole === "admin") {
+        return NextResponse.next();
+      } else {
+        return NextResponse.redirect(new URL("/NoAccess", req.url));
+      }
     }
   }
 

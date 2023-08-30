@@ -1,5 +1,5 @@
 "use client";
-import React ,{ Fragment, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import Link from "next/link";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -11,7 +11,7 @@ const navigation = [
   { name: "Dashboard", href: "/Dashboard" },
   { name: "Student", href: "/Dashboard/Student" },
   { name: "Reports", href: "/Dashboard/Report" },
-]
+];
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -48,16 +48,14 @@ export default function Example() {
                           </Link>
                         ))}
                         <button
-                  
-                    className={classNames(
-                      "text-gray-300 hover:bg-gray-700 hover:text-white",
-                      "block rounded-md px-3 py-2 text-base font-medium"
-                    )}
-                    onClick= {()=>signOut() }
-                  >
-                    Logout
-                  
-                </button>
+                          className={classNames(
+                            "text-gray-300 hover:bg-gray-700 hover:text-white",
+                            "block rounded-md px-3 py-2 text-base font-medium"
+                          )}
+                          onClick={() => signOut()}
+                        >
+                          Logout
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -129,7 +127,6 @@ export default function Example() {
             </h1>
           </div>
         </header>
-       
       </div>
     </>
   );
