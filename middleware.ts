@@ -14,7 +14,7 @@ export default async function middleware(req: NextRequest) {
       path === "/profile" ||
       path.startsWith("/Dashboard") ||
       path === "/feedback") ||
-      path === "/api"
+      path.startsWith("/api")
   ) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
