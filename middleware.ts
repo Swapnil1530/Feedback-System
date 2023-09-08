@@ -35,7 +35,15 @@ export default async function middleware(req: NextRequest) {
         return NextResponse.redirect(new URL("/NoAccess", req.url));
       }
     }
+
+    if(path.startsWith("/api")){
+      if(userRole === "admin"){
+        return NextResponse.next();
+    }else{
+        return NextResponse.redirect(new URL("/NoAccess", req.url));
+    }
   }
+}
 
   return NextResponse.next();
 }
