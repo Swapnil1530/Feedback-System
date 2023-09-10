@@ -9,13 +9,13 @@ export default async function middleware(req: NextRequest) {
   });
 
   if (
-    !session &&
-    (path === "/" ||
-      path === "/profile" ||
-      path === "/feedback" ||
-      path.startsWith("/Dashboard") ||
-      path === "/api/feedback") 
-      
+    (!session &&
+      (path === "/" ||
+        path === "/profile" ||
+        path === "/feedback" ||
+        path.startsWith("/Dashboard") ||
+        path === "/feedback")) ||
+    path === "/api/feedback"
   ) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
@@ -37,16 +37,16 @@ export default async function middleware(req: NextRequest) {
         return NextResponse.redirect(new URL("/NoAccess", req.url));
       }
     }
-    
+
     //protecting api routes and only access admin user
     if (path === "/api/feedback") {
-      if(userRole === "admin"){
+      if (userRole === "admin") {
         return NextResponse.next();
-      }else{
+      } else {
         return NextResponse.redirect(new URL("/NoAccess", req.url));
       }
-    }   
-}
+    }
+  }
 
   return NextResponse.next();
 }
