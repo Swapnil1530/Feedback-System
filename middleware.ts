@@ -12,9 +12,10 @@ export default async function middleware(req: NextRequest) {
     !session &&
     (path === "/" ||
       path === "/profile" ||
+      path === "/feedback" ||
       path.startsWith("/Dashboard") ||
-      path === "/feedback") ||
-      path.startsWith("/api")
+      path === "/api/feedback") 
+      
   ) {
     return NextResponse.redirect(new URL("/login", req.url));
   }
@@ -38,7 +39,7 @@ export default async function middleware(req: NextRequest) {
     }
     
     //protecting api routes and only access admin user
-    if (path.startsWith("/api")) {
+    if (path === "/api/feedback") {
       if(userRole === "admin"){
         return NextResponse.next();
       }else{
